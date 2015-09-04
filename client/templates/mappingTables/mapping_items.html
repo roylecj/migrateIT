@@ -1,0 +1,98 @@
+<template name="mappingItems">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      {{#if editingTable}}
+        <table>
+          <tr>
+            <td>
+                <input class="form-control" id="newTableName" name="newTableName" type="text" value="{{tableName}}">
+            </td>
+            <td>
+            </td>
+            <td>
+              <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnSave"></button>
+              <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnCancel"></button>
+            </td>
+          </tr>
+        </table>
+      {{else}}
+        {{tableName}}
+        <button class="glyphicon glyphicon-pencil btn-xs btn-info pull-right btnEdit"></button>
+      {{/if}}
+    </div>
+    <div class="panel-body">
+      {{#if editingTable}}
+        <input class="form-control" id="newTableDescription" name="newTableDescription" type="text" value="{{description}}">
+      {{else}}
+        <p>{{description}}</p>
+      {{/if}}
+    </div>
+  </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Mappings
+      <button class="btn btn-xs {{includeOld}} pull-right btnMaps" id="oldMaps" name="oldMaps">{{oldMappingText}}</button>
+    </div>
+    <div class="panel-body">
+    <table class="table table-hover table-striped">
+        <thead>
+          <th class="oldCodeHeader">Old Code <span class="glyphicon {{sortOrderColumn 'oldCode'}}"></span></th>
+          <th class="newCodeHeader">New Code <span class="glyphicon {{sortOrderColumn 'newCode'}}"></span></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+              </span>
+              <input class="form-control oldCodeSearch" id="oldCodeSearch" name="oldCodeSearch" type="text" value="">
+            </div>
+            </td>
+            <td>
+              <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+              </span>
+              <input class="form-control newCodeSearch" id="newCodeSearch" name="newCodeSearch" type="text" value="">
+            </div>
+
+            </td>
+
+            <td>
+            </td>
+          </tr>
+        {{#each mappingTableItems}}
+        <tr class="mappingRow"><span class="mappingId hide" name="mappingId">{{_id}}</span>
+
+            <td class="mappingOld" name="mappingOld">
+              <input class="form-control oldCodeEdit {{editItem 'edit'}}" id="oldCodeEdit" name="oldCodeEdit" type="text" value="{{oldCode}}">
+              <span class="{{editItem 'view'}} mappingOldCode">{{oldCode}}</span>
+            </td>
+            <td class="mappingNew" name="mappingNew">
+              <input class="form-control newCodeEdit {{editItem 'edit'}}" id="newCodeEdit" name="newCodeEdit" type="text" value="{{newCode}}">
+              <span class="{{editItem 'view' mappingNewCode}}">{{newCode}}</span>
+            </td>
+            <td>
+              <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnRemove {{editItem 'view'}}"></button>
+              <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnEditSave {{editItem 'edit'}}"></button>
+              <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnEditCancel {{editItem 'edit'}}"></button>
+            </td>
+        </tr>
+        {{/each}}
+        <tr class="newRow">
+          <td>
+            <input class="form-control oldCodeInput" id="oldCodeInput" name="oldCodeInput" type="text" value="">
+          </td>
+          <td>
+            <input class="form-control newCodeInput" id="newCodeInput" name="newCodeInput" type="text" value="">
+          </td>
+          <td>
+            <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnAdd {{textChanged}}"></button>
+            <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnAddCancel {{textChanged}}"></button>
+          </td>
+        </tr>
+        </tbody>
+    </table>
+  </div>
+  </div>
+</template>

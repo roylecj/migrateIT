@@ -1,0 +1,300 @@
+Template.mappingItems.onCreated(function() {
+  Session.setDefault("textChanged", false);
+  Session.setDefault("editItem", "");
+  Session.setDefault("includeOldMappings", false);
+  Session.setDefault("sortOrder", 1);
+  Session.setDefault("columnSort", "oldCode");
+});
+Template.mappingItems.helpers({
+  mappingTableItems: function() {
+
+    var sortOrder;
+    var sortQueryString = {};
+
+    sortOrder = Session.get("sortOrder");
+    sortColumn = Session.get("columnSort");
+
+    sortQueryString = "{" + sortColumn + ": " + sortOrder + "}";
+
+    var sortQuery = JSON.parse(JSON.stringify(sortQueryString, {indent: true}));
+
+    console.log(sortQuery);
+
+    return MappingTableItems.find({ tableId: this._id}, {sort: sortQuery}).fetch();
+/*
+    if (Session.get("includeOldMappings")) {
+
+      if (Session.get("columnSort") === "oldCode") {
+        return MappingTableItems.find({ tableId: this._id}, {sort: {
+          oldCode: sortOrder}}).fetch();
+      } else {
+        return MappingTableItems.find({ tableId: this._id}, {sort: {
+          newCode: sortOrder}}).fetch();
+      }
+    } else {
+      if (Session.get("columnSort") === "oldCode") {
+        return MappingTableItems.find({ tableId: this._id, activeFlag: true}, {sort: {
+          oldCode: sortOrder}}).fetch();
+      } else {
+        return MappingTableItems.find({ tableId: this._id, activeFlag: true}, {sort: {
+          newCode: sortOrder}}).fetch();
+      }
+    }
+*/
+  },
+  sortOrderColumn: function(colName) {
+    if (Session.get("columnSort") === colName) {
+      if (Session.get("sortOrder") === 1) {
+        return "glyphicon-arrow-up"
+      } else {
+        return "glyphicon-arrow-down"
+      }
+    } else {
+      return " hide "
+    }
+
+  },
+  editingTable: function() {
+    return Session.get("editingTable");
+  },
+  editItem: function(viewState) {
+    if (viewState === "edit") {
+      if (Session.get("editItem") === this._id) {
+        return " "
+      } else {
+        return " hide "
+      }
+    } else {
+      if (Session.get("editItem") === this._id) {
+        return " hide "
+      } else {
+        return " "
+      }
+    }
+  },
+  includeOld: function() {
+    if (Session.get("includeOldMappings")) {
+      return "btn-success"
+    } else {
+      return "btn-info"
+    }
+  },
+  oldMappingText: function() {
+    if (Session.get("includeOldMappings")) {
+      return "Inactive Mappings Included"
+    } else {
+      return "Include Inactive Mappings"
+    }
+  },
+  textChanged: function() {
+    if (Session.get("textChanged")) {
+      return " "
+    } else {
+      return " hide "
+    }
+  },
+  oldSeach: function() {
+
+  }
+});
+
+Template.mappingItems.events({
+  'keypress .oldCodeInput': function(e) {
+    Session.set("textChanged", true);
+    Session.set("editItem", "");
+  },
+  'keypress .newCodeInput': function(e) {
+    Session.set("textChanged", true);
+    Session.set("editItem", "");
+  },
+  'keyup .oldCodeSearch': function(e) {
+    // We need to set the search string...
+    var oldSearchString = "";
+
+    oldSearchString = e.target.value();
+
+    Session.set("oldCodeSearchString", oldSearchString);
+  },
+  'click .mappingOld': function(e) {
+
+    var itemId = $(e.target.parentNode).find('[name=mappingId]').text();
+
+    if (itemId) {
+      Session.set("editItem", itemId);
+
+    }
+  },
+  'click .btnMaps': function(e) {
+    console.log("old maps clicked");
+
+    if (Session.get("includeOldMappings")) {
+      Session.set("includeOldMappings", false);
+    } else {
+      Session.set("includeOldMappings", true);
+    }
+  },
+  'click .mappingNew': function(e) {
+    var itemId = $(e.target.parentNode).find('[name=mappingId]').text();
+    console.log("itemId=" + itemId);
+
+    if (itemId) {
+      Session.set("editItem", itemId);
+    }
+  },
+  'click .btnEdit': function(e) {
+    Session.set("editingTable", true);
+  },
+  'click .btnSave': function(e) {
+    Session.set("editingTable", false);
+
+    // We can edit the name of the table and the description
+
+    var mappingTableDetails = {};
+
+    mappingTableDetails.id = this._id;
+    mappingTableDetails.tableName = $(e.target.parentNode.parentNode.parentNode.parentNode.parentNode).find('[name=newTableName]').val();
+    mappingTableDetails.description = $(e.target.parentNode.parentNode.parentNode.parentNode.parentNode).find('[name=newTableDescription]').val();
+
+    Meteor.call('updateMappingTable', mappingTableDetails);
+  },
+  'click .btnCancel': function(e) {
+    Session.set("editingTable", false);
+  },
+  'click .btnRemove': function(e) {
+//    console.log(e.target.parentNode.parentNode);
+
+    var itemId;
+
+//    debugger
+
+    itemId = $(e.target.parentNode.parentNode).find('[name=mappingId]').text();
+
+    Meteor.call('removeMappingTableItem', itemId);
+
+    console.log('after removal');
+
+  },
+  'click .btnAddCancel': function(e) {
+    Session.set("textChanged", false);
+
+    // Clear out the fields..
+
+    $(e.target.parentNode.parentNode).find('[name=oldCodeInput]').val("");
+    $(e.target.parentNode.parentNode).find('[name=newCodeInput]').val("");
+
+  },
+  'click .btnEditCancel': function(e) {
+
+    // Clear out the edited item...
+    Session.set("editItem", "");
+  },
+  'click .btnEditSave': function(e) {
+
+    var itemId;
+    var newItem = {};
+
+    itemId = $(e.target.parentNode.parentNode).find('[name=mappingId]').text();
+
+    newItem.id = itemId;
+    newItem.oldCode = "";
+    newItem.newCode = "";
+    newItem.oldCode = $(e.target.parentNode.parentNode).find('[name=oldCodeEdit]').val();
+    newItem.newCode = $(e.target.parentNode.parentNode).find('[name=newCodeEdit]').val();
+
+    var errors = validateExistingItem(newItem.id, newItem.oldCode, newItem.newCode);
+
+    if (errors.oldCode || errors.missingOldCode || errors.missingNewCode || errors.sameCode) {
+      if (errors.oldCode) {
+        sAlert.error(errors.oldCode);
+      }
+
+      if (errors.missingOldCode) {
+        sAlert.error(errors.missingOldCode);
+      }
+
+      if (errors.missingNewCode) {
+        sAlert.error(errors.missingNewCode);
+      }
+
+      if (errors.sameCode) {
+        sAlert.error(errors.sameCode);
+      }
+      return;
+    } else {
+        Meteor.call('updateMappingTableItem', newItem );
+        // Clear out the item
+        Session.set("editItem", "");
+    }
+  },
+  'click .oldCodeHeader': function(e) {
+      if (Session.get("columnSort") === "oldCode") {
+        if (Session.get("sortOrder") === 1) {
+          Session.set("sortOrder", -1)
+        } else {
+          Session.set("sortOrder", 1)
+        }
+      } else {
+        Session.set("columnSort", "oldCode");
+        Session.set("sortOrder", 1);
+      }
+  },
+  'click .newCodeHeader': function(e) {
+    if (Session.get("columnSort") === "newCode") {
+      if (Session.get("sortOrder") === 1) {
+        Session.set("sortOrder", -1)
+      } else {
+        Session.set("sortOrder", 1)
+      }
+    } else {
+      Session.set("columnSort", "newCode");
+      Session.set("sortOrder", 1);
+    }
+  },
+  'click .btnAdd': function(e) {
+    // This is adding a new entry into the list...
+    var tableId;
+    var oldCode;
+    var newCode;
+
+    Session.set("textChanged", false);
+
+    tableId = this._id;
+
+    // Need to go two levels up, as we are clicking on the button.
+    oldCode = $(e.target.parentNode.parentNode).find('[name=oldCodeInput]').val();
+    newCode = $(e.target.parentNode.parentNode).find('[name=newCodeInput]').val();
+
+//    debugger
+
+    console.log('tableId=' + tableId);
+    console.log('oldcode=' + oldCode);
+    console.log('newCode=' + newCode);
+
+    var errors = validateTableItem(tableId, oldCode, newCode);
+
+    if (errors.oldCode || errors.missingOldCode || errors.missingNewCode || errors.sameCode) {
+      if (errors.oldCode) {
+        sAlert.error(errors.oldCode);
+      }
+
+      if (errors.missingOldCode) {
+        sAlert.error(errors.missingOldCode);
+      }
+
+      if (errors.missingNewCode) {
+        sAlert.error(errors.missingNewCode);
+      }
+
+      if (errors.sameCode) {
+        sAlert.error(errors.sameCode);
+      }
+      return;
+    } else {
+        Meteor.call('addMappingTableItem', tableId, oldCode, newCode);
+
+        // Now clear the fields
+        $(e.target.parentNode.parentNode).find('[name=oldCodeInput]').val("");
+        $(e.target.parentNode.parentNode).find('[name=newCodeInput]').val("");
+    }
+  }
+});
