@@ -1,8 +1,11 @@
 <template name="mappingTableItem">
-  <td>
-    <a href="{{pathFor 'mappingItems'}}">{{tableName}}</a>
-  </td>
-  <td>
-    <span class="badge">{{mappingCount}}</span>
-  </td>
+  <tr>
+    <td>
+      <a href="{{pathFor 'mappingItems'}}">{{tableName}}</a>
+      <span class="badge">{{mappingCount}}</span>
+    </td>
+    <td>
+      <button class="btn btn-xs pull-right btn-danger btnRemoveTable"><span class="glyphicon glyphicon-remove"></span></button>
+    </td>
+  </tr>
 </template>
