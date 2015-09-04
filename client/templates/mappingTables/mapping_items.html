@@ -55,9 +55,7 @@
               </span>
               <input class="form-control newCodeSearch" id="newCodeSearch" name="newCodeSearch" type="text" value="">
             </div>
-
             </td>
-
             <td>
             </td>
           </tr>
@@ -66,14 +64,18 @@
 
             <td class="mappingOld" name="mappingOld">
               <input class="form-control oldCodeEdit {{editItem 'edit'}}" id="oldCodeEdit" name="oldCodeEdit" type="text" value="{{oldCode}}">
-              <span class="{{editItem 'view'}} mappingOldCode">{{oldCode}}</span>
+              <span class="{{editItem 'view'}} mappingOldCode" name="mappingOldCode">{{oldCode}}</span>
             </td>
             <td class="mappingNew" name="mappingNew">
               <input class="form-control newCodeEdit {{editItem 'edit'}}" id="newCodeEdit" name="newCodeEdit" type="text" value="{{newCode}}">
-              <span class="{{editItem 'view' mappingNewCode}}">{{newCode}}</span>
+              <span class="{{editItem 'view' mappingNewCode}}" name="mappingNewCode">{{newCode}}</span>
             </td>
             <td>
-              <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnRemove {{editItem 'view'}}"></button>
+              {{#if activeRecord}}
+                <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnRemove {{editItem 'view'}}"></button>
+              {{else}}
+                <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnReinstate {{editItem 'view'}}"></button>
+              {{/if}}
               <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnEditSave {{editItem 'edit'}}"></button>
               <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnEditCancel {{editItem 'edit'}}"></button>
             </td>

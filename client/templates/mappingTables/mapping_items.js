@@ -81,6 +81,9 @@ Template.mappingItems.helpers({
 
     }
   },
+  activeRecord: function() {
+    return this.activeFlag;
+  },
   sortOrderColumn: function(colName) {
     if (Session.get("columnSort") === colName) {
       if (Session.get("sortOrder") === 1) {
@@ -161,6 +164,40 @@ Template.mappingItems.events({
 
     Session.set("newCodeSearchString", newSearchString);
   },
+  'click .btnReinstate': function(e) {
+    var tableId;
+
+    tableId = $(e.target.parentNode.parentNode).find('[name=mappingId]').text();
+
+    var newItem = {};
+    newItem.id = tableId;
+    newItem.oldCode = $(e.target.parentNode.parentNode).find('[name=mappingOldCode]').text();
+    newItem.newCode = $(e.target.parentNode.parentNode).find('[name=mappingNewCode]').text();
+
+    var errors = validateExistingItem(newItem.id, newItem.oldCode, newItem.newCode);
+
+    if (errors.oldCode || errors.missingOldCode || errors.missingNewCode || errors.sameCode) {
+      if (errors.oldCode) {
+        sAlert.error(errors.oldCode);
+      }
+
+      if (errors.missingOldCode) {
+        sAlert.error(errors.missingOldCode);
+      }
+
+      if (errors.missingNewCode) {
+        sAlert.error(errors.missingNewCode);
+      }
+
+      if (errors.sameCode) {
+        sAlert.error(errors.sameCode);
+      }
+      return;
+    } else {
+//        console.log("reinstating item");
+        Meteor.call("reinstateMappingTableItem", tableId);
+    }
+  },
   'click .mappingOld': function(e) {
 
     var itemId = $(e.target.parentNode).find('[name=mappingId]').text();
@@ -217,7 +254,7 @@ Template.mappingItems.events({
 
     Meteor.call('removeMappingTableItem', itemId);
 
-    console.log('after removal');
+//    console.log('after removal');
 
   },
   'click .btnAddCancel': function(e) {
