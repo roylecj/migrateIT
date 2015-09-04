@@ -14,33 +14,72 @@ Template.mappingItems.helpers({
     sortOrder = Session.get("sortOrder");
     sortColumn = Session.get("columnSort");
 
-    sortQueryString = "{" + sortColumn + ": " + sortOrder + "}";
+    var sortQuery;
+    sortQueryString = "{\"" + sortColumn + "\":" + sortOrder + "}"
+    var sortQuery = JSON.parse(sortQueryString);
+    var oldSearch = Session.get("oldCodeSearchString");
+    var newSearch = Session.get("newCodeSearchString");
 
-    var sortQuery = JSON.parse(JSON.stringify(sortQueryString, {indent: true}));
+    var includeOldMappings;
 
-    console.log(sortQuery);
+    includeOldMappings = Session.get("includeOldMappings");
 
-    return MappingTableItems.find({ tableId: this._id}, {sort: sortQuery}).fetch();
-/*
-    if (Session.get("includeOldMappings")) {
-
-      if (Session.get("columnSort") === "oldCode") {
-        return MappingTableItems.find({ tableId: this._id}, {sort: {
-          oldCode: sortOrder}}).fetch();
-      } else {
-        return MappingTableItems.find({ tableId: this._id}, {sort: {
-          newCode: sortOrder}}).fetch();
+    if (includeOldMappings) {
+      if (oldSearch) {
+        if (newSearch) {
+          return MappingTableItems.find({
+            tableId: this._id,
+            oldCode: {$regex: oldSearch, $options: 'i'},
+            newCode: {$regex: newSearch, $options: 'i'},
+          }, {sort: sortQuery} );
+        } else {
+          return MappingTableItems.find({
+            tableId: this._id,
+            oldCode: {$regex: oldSearch, $options: 'i'}
+          }, {sort: sortQuery} );
+        }
       }
+      else {
+        if (newSearch) {
+
+          return MappingTableItems.find({
+            tableId: this._id,
+            newCode: {$regex: newSearch, $options: 'i'}
+          }, {sort: sortQuery});
+        } else {
+        return MappingTableItems.find({tableId: this._id}, {sort: sortQuery});
+      }}
+
     } else {
-      if (Session.get("columnSort") === "oldCode") {
-        return MappingTableItems.find({ tableId: this._id, activeFlag: true}, {sort: {
-          oldCode: sortOrder}}).fetch();
-      } else {
-        return MappingTableItems.find({ tableId: this._id, activeFlag: true}, {sort: {
-          newCode: sortOrder}}).fetch();
+      if (oldSearch) {
+        if (newSearch) {
+          return MappingTableItems.find({
+            tableId: this._id,
+            oldCode: {$regex: oldSearch, $options: 'i'},
+            newCode: {$regex: newSearch, $options: 'i'},
+            activeFlag: true
+          }, {sort: sortQuery} );
+        } else {
+          return MappingTableItems.find({
+            tableId: this._id,
+            oldCode: {$regex: oldSearch, $options: 'i'},
+            activeFlag: true
+          }, {sort: sortQuery} );
+        }
       }
+      else {
+        if (newSearch) {
+
+          return MappingTableItems.find({
+            tableId: this._id,
+            newCode: {$regex: newSearch, $options: 'i'},
+            activeFlag: true
+          }, {sort: sortQuery});
+        } else {
+        return MappingTableItems.find({tableId: this._id, activeFlag: true}, {sort: sortQuery});
+      }}
+
     }
-*/
   },
   sortOrderColumn: function(colName) {
     if (Session.get("columnSort") === colName) {
@@ -111,9 +150,16 @@ Template.mappingItems.events({
     // We need to set the search string...
     var oldSearchString = "";
 
-    oldSearchString = e.target.value();
+    oldSearchString = e.target.value;
 
     Session.set("oldCodeSearchString", oldSearchString);
+  },
+  'keyup .newCodeSearch': function(e) {
+    var newSearchString = "";
+
+    newSearchString = e.target.value;
+
+    Session.set("newCodeSearchString", newSearchString);
   },
   'click .mappingOld': function(e) {
 
