@@ -10,13 +10,16 @@
       <a class="navbar-brand" href="{{pathFor 'mappingTable'}}">migrateIT</a>
     </div>
 
-    {{#if signedIn}}
+<!--    {{#if signedIn}} -->
+    {{#if currentUser}}
     <div class="collapse navbar-collapse" id="navigation">
 
       <ul class="nav navbar-nav">
         <li><a href="{{pathFor 'mappingTable'}}">Mapping Tables</a></li>
+        <li><a href="{{pathFor 'systemDetails'}}">Systems</a></li>
 <!--        <li><a href="{{pathFor 'errorReports'}}">Error Reports</a></li>
         <li><a href="{{pathFor 'auditInfo'}}">Migration Audit</a></li> -->
+        <li><a href="{{pathFor 'accounts'}}">Users</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

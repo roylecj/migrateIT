@@ -1,0 +1,71 @@
+<template name="accountAdd">
+  <form class="main form page">
+
+  <div class="form-group">
+    <label class="control-label" for="loginName">Login</label>
+    <div class="controls">
+        <input name="loginName" id="loginName" type="text" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="passowrd">Password</label>
+    <div class="controls">
+        <input name="password" id="password" type="password" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="confirmPassowrd">Confirm Password</label>
+    <div class="controls">
+        <input name="confirmPassword" id="confirmPassword" type="password" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="userName">Person Name</label>
+    <div class="controls">
+        <input name="userName" id="userName" type="text" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="email">Email Address</label>
+    <div class="controls">
+        <input name="email" id="email" type="text" value="" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+  <table class="table table-hover">
+    <tr>
+      <td>
+        <button class="btn btn-xs {{canView}} btnCanView"><span class="glyphicon glyphicon-search"></span> View</button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button class="btn btn-xs {{canAdd}} btnCanAdd"><span class="glyphicon glyphicon-plus"></span> Add</button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button class="btn btn-xs {{canEdit}} btnCanEdit"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button class="btn btn-xs {{canRemove}} btnCanRemove"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button class="btn btn-xs {{isSuperUser}} btnSuperUser"><span class="glyphicon glyphicon-star"></span> Super User</button>
+      </td>
+    </tr>
+  </table>
+</div>
+  <input type="submit" value="Submit" class="btn btn-primary"/>
+</form>
+</template>

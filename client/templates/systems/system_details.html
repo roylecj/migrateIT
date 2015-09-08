@@ -1,0 +1,19 @@
+<template name="systemDetails">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Systems
+      <a class="btn btn-xs btn-info pull-right" href="#"><span class="glyphicon glyphicon-plus"></span> Add System</a>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <tbody>
+        {{#each systems}}
+          {{> systemInfo}}
+        {{/each}}
+      </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</template>

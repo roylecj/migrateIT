@@ -1,0 +1,15 @@
+<template name="systemInfo">
+  <tr>
+    <td>
+      <span class="hide" name="systemId">{{_id}}</span>
+      <input class="form-control {{editItem 'edit'}}" id="systemName" name="systemName" type="text" value="{{systemName}}">
+      <span class="{{editItem 'view'}} systemNames">{{systemName}}</span>
+    </td>
+    <td>
+      <button class="btn btn-xs pull-right btn-danger btnCancelEdit {{editItem 'edit'}}"><span class="glyphicon glyphicon-remove"></span></button>
+      <button class="btn btn-xs pull-right btn-success btnSaveEdit {{editItem 'edit'}}"><span class="glyphicon glyphicon-ok"></span></button>
+      <button class="btn btn-xs pull-right btn-danger btnRemoveSystem {{editItem 'view'}}"><span class="glyphicon glyphicon-remove"></span></button>
+      <button class="btn btn-xs pull-right btn-info btnEditSystem {{editItem 'view'}}"><span class="glyphicon glyphicon-pencil"></span></button>
+    </td>
+  </tr>
+</template>

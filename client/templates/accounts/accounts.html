@@ -1,3 +1,27 @@
 <template name="accounts">
-  <h1>Accounts</h1>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Users
+      <a class="btn btn-xs btn-info pull-right" href="{{pathFor 'accountAdd'}}"><span class="glyphicon glyphicon-plus"></span> Add User</a>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <thead>
+          <th>User</th>
+          <th>Can View</th>
+          <th>Can Add</th>
+          <th>Can Edit</th>
+          <th>Can Delete</th>
+          <th>Super User</th>
+        </thead>
+        <tbody>
+            {{#each account}}
+              {{> accountItem}}
+            {{/each}}
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
 </template>
