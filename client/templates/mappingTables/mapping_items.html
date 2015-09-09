@@ -17,7 +17,9 @@
         </table>
       {{else}}
         {{tableName}}
-        <button class="glyphicon glyphicon-pencil btn-xs btn-info pull-right btnEdit"></button>
+        {{#if isSuperUser}}
+          <button class="glyphicon glyphicon-pencil btn-xs btn-info pull-right btnEdit"></button>
+        {{/if}}
       {{/if}}
     </div>
     <div class="panel-body">
@@ -26,6 +28,12 @@
       {{else}}
         <p>{{description}}</p>
       {{/if}}
+    </div>
+    <div class="panel-footer">
+      Mapping used for:
+      {{#each systems}}
+        {{> mappingSystemItem}}
+      {{/each}}
     </div>
   </div>
   <div class="panel panel-primary">
@@ -71,16 +79,23 @@
               <span class="{{editItem 'view' mappingNewCode}}" name="mappingNewCode">{{newCode}}</span>
             </td>
             <td>
+              {{#if canEdit}}
               {{#if activeRecord}}
-                <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnRemove {{editItem 'view'}}"></button>
+                {{#if canRemove}}
+                  <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnRemove {{editItem 'view'}}"></button>
+                {{/if}}
               {{else}}
-                <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnReinstate {{editItem 'view'}}"></button>
+                {{#if canRemove}}
+                  <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnReinstate {{editItem 'view'}}"></button>
+                {{/if}}
               {{/if}}
               <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnEditSave {{editItem 'edit'}}"></button>
               <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnEditCancel {{editItem 'edit'}}"></button>
+              {{/if}}
             </td>
         </tr>
         {{/each}}
+        {{#if canAdd}}
         <tr class="newRow">
           <td>
             <input class="form-control oldCodeInput" id="oldCodeInput" name="oldCodeInput" type="text" value="">
@@ -93,6 +108,7 @@
             <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnAddCancel {{textChanged}}"></button>
           </td>
         </tr>
+        {{/if}}
         </tbody>
     </table>
   </div>

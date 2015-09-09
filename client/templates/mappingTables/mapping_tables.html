@@ -2,7 +2,9 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
     Mapping Tables
+    {{#if isSuperUser}}
     <a class="btn btn-xs btn-info pull-right" href="{{pathFor 'mappingTableAdd'}}"><span class="glyphicon glyphicon-plus"></span> Add Table</a>
+    {{/if}}
   </div>
   <div class="panel-body">
     <div class="table-responsive">

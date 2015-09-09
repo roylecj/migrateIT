@@ -69,4 +69,16 @@ Template.accountItem.helpers({
       return 'btn-default';
     }
   }
-})
+});
+
+Template.accountItem.events({
+    'click .btnRemoveUser': function(e) {
+      var userId = "";
+
+      userId = $(e.target.parentNode.parentNode).find('[name=currentUser]').text();
+      if (userId) {
+        Meteor.call('removeUser', userId);
+
+      }
+    }
+});

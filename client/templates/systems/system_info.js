@@ -3,7 +3,6 @@ Template.systemInfo.onCreated(function() {
 });
 Template.systemInfo.helpers({
   editItem: function(viewState) {
-    console.log("editItem " + this._id);
 
     if (viewState === "edit") {
       if (Session.get("editItem") === this._id) {
@@ -35,7 +34,6 @@ Template.systemInfo.events({
     var itemId = $(e.target.parentNode.parentNode.parentNode).find('[name=systemId]').text();
     var systemName = $(e.target.parentNode.parentNode.parentNode).find('[name=systemName]').val();
 
-console.log("saving edit - " + systemName);
     Meteor.call('updateSystem', itemId, systemName);
     Session.set("editItem", "");
   },
@@ -43,6 +41,17 @@ console.log("saving edit - " + systemName);
 
     // Don't need to do anything special
     Session.set("editItem", "");
+  },
+  'click .btnRemoveSystem': function(e) {
+    var systemId = $(e.target.parentNode.parentNode.parentNode).find('[name=systemId]').text();
+
+    // Check that the table is not used anywhere...
+
+    if (MappingTableSystems.find({systemId: systemId, activeFlag: true}).count() > 0) {
+      sAlert.error('System "' + this.systemName + '" is used by a mapping table so cannot be removed, remove table first');
+    } else {
+      Meteor.call("removeSystem", systemId);
+    }
   }
 
 });

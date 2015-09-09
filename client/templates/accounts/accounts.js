@@ -1,5 +1,5 @@
 Template.accounts.helpers({
-  account: function() { 
-    return UserInfo.find().fetch();
+  account: function() {
+    return Meteor.users.find().fetch();
   }
 });

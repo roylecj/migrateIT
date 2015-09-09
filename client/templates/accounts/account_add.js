@@ -55,13 +55,36 @@ Template.accountAdd.events({
     var passwd = $('[name=password]').val();
     var emailAddress = $('[name=email]').val();
     var personName = $('[name=userName]').val();
-    var perms = {};
+    var perms = [];
+
+    if (Session.get("isSuperUser")) {
+      perms.push("admin");
+    };
+    if (Session.get("canAdd")) {
+      perms.push("add");
+    };
+    if (Session.get("canEdit")) {
+      perms.push("edit");
+    };
+    if (Session.get("canRemove")) {
+      perms.push("remove");
+    };
+    if (Session.get("canView")) {
+      perms.push("view");
+    };
 
     Meteor.call('addUser', loginName, passwd, emailAddress, personName, perms);
+
+    Session.set("canView", false);
+    Session.set("canAdd", false);
+    Session.set("canEdit", false);
+    Session.set("canRemove", false);
+    Session.set("isSuperUser", false);
 
     Router.go("accounts");
   },
   'click .btnCanView': function(e) {
+    e.preventDefault();
     Session.set("canView", ! Session.get("canView"));
 
     if (Session.get("canView") === false) {
@@ -72,6 +95,7 @@ Template.accountAdd.events({
     }
   },
   'click .btnCanAdd' : function(e) {
+    e.preventDefault();
     Session.set("canAdd", ! Session.get("canAdd"));
 
     if (Session.get("canAdd")){
@@ -84,6 +108,7 @@ Template.accountAdd.events({
     }
   },
   'click .btnCanEdit': function(e) {
+    e.preventDefault();
     Session.set("canEdit", ! Session.get("canEdit"));
 
     if (Session.get("canEdit")){
@@ -95,6 +120,7 @@ Template.accountAdd.events({
     }
   },
   'click .btnCanRemove': function(e) {
+    e.preventDefault();
     Session.set("canRemove", ! Session.get("canRemove"));
 
     if (Session.get("canRemove")){
@@ -107,6 +133,7 @@ Template.accountAdd.events({
     }
   },
   'click .btnSuperUser': function(e) {
+      e.preventDefault();
     Session.set("isSuperUser", ! Session.get("isSuperUser"));
 
     if (Session.get("isSuperUser")){

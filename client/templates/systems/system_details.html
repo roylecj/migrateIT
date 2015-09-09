@@ -2,7 +2,7 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       Systems
-      <a class="btn btn-xs btn-info pull-right" href="#"><span class="glyphicon glyphicon-plus"></span> Add System</a>
+      <a class="btn btn-xs btn-info pull-right {{disableButton}} btnAddSystem" href="#"><span class="glyphicon glyphicon-plus"></span> Add System</a>
     </div>
     <div class="panel-body">
       <div class="table-responsive">
@@ -11,6 +11,18 @@
         {{#each systems}}
           {{> systemInfo}}
         {{/each}}
+
+        {{#if addSystem}}
+        <tr>
+          <td>
+            <input class="form-control" id="newSystemName" name="newSystemName" type="text" value="">
+          </td>
+          <td>
+            <button class="btn btn-xs pull-right btn-danger btnCancelAdd"><span class="glyphicon glyphicon-remove"></span></button>
+            <button class="btn btn-xs pull-right btn-success btnSaveAdd"><span class="glyphicon glyphicon-ok"></span></button>
+          </td>
+        </tr>
+        {{/if}}
       </tbody>
       </table>
     </div>

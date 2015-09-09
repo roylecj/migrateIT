@@ -4,8 +4,53 @@ Template.mappingItems.onCreated(function() {
   Session.setDefault("includeOldMappings", false);
   Session.setDefault("sortOrder", 1);
   Session.setDefault("columnSort", "oldCode");
+  Session.setDefault("editingRecord", this._id);
 });
 Template.mappingItems.helpers({
+  isSuperUser: function() {
+    var loggedInUser = Meteor.user().username;
+    var perms = ['admin'];
+    var valid = Meteor.apply('checkPermission', [loggedInUser, perms], { returnStubValue: true });
+
+    if (valid) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  canAdd: function() {
+    var loggedInUser = Meteor.user().username;
+    var perms = ['add', 'edit', 'remove','admin'];
+    var valid = Meteor.apply('checkPermission', [loggedInUser, perms], { returnStubValue: true });
+
+    if (valid) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  canEdit: function() {
+    var loggedInUser = Meteor.user().username;
+    var perms = ['edit', 'remove','admin'];
+    var valid = Meteor.apply('checkPermission', [loggedInUser, perms], { returnStubValue: true });
+
+    if (valid) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  canRemove: function() {
+    var loggedInUser = Meteor.user().username;
+    var perms = ['remove','admin'];
+    var valid = Meteor.apply('checkPermission', [loggedInUser, perms], { returnStubValue: true });
+
+    if (valid) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   mappingTableItems: function() {
 
     var sortOrder;
@@ -137,15 +182,20 @@ Template.mappingItems.helpers({
   },
   oldSeach: function() {
 
+  },
+  systems: function() {
+    return SystemDetails.find({activeFlag: true});
   }
 });
 
 Template.mappingItems.events({
   'keypress .oldCodeInput': function(e) {
+
     Session.set("textChanged", true);
     Session.set("editItem", "");
   },
   'keypress .newCodeInput': function(e) {
+
     Session.set("textChanged", true);
     Session.set("editItem", "");
   },
@@ -200,11 +250,17 @@ Template.mappingItems.events({
   },
   'click .mappingOld': function(e) {
 
+    var loggedInUser = Meteor.user().username;
+    var perms = ['edit', 'remove','admin'];
+    var valid = Meteor.apply('checkPermission', [loggedInUser, perms], { returnStubValue: true });
+
+    if (valid) {
+
     var itemId = $(e.target.parentNode).find('[name=mappingId]').text();
 
     if (itemId) {
       Session.set("editItem", itemId);
-
+      }
     }
   },
   'click .btnMaps': function(e) {
@@ -217,15 +273,22 @@ Template.mappingItems.events({
     }
   },
   'click .mappingNew': function(e) {
+    var loggedInUser = Meteor.user().username;
+    var perms = ['edit', 'remove','admin'];
+    var valid = Meteor.apply('checkPermission', [loggedInUser, perms], { returnStubValue: true });
+
+    if (valid) {
+
     var itemId = $(e.target.parentNode).find('[name=mappingId]').text();
-    console.log("itemId=" + itemId);
 
     if (itemId) {
       Session.set("editItem", itemId);
+      }
     }
   },
   'click .btnEdit': function(e) {
     Session.set("editingTable", true);
+    Session.set("editingRecord", this._id);
   },
   'click .btnSave': function(e) {
     Session.set("editingTable", false);
