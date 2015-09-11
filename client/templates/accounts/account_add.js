@@ -9,37 +9,38 @@ Template.accountAdd.onCreated(function() {
 Template.accountAdd.helpers({
   canView: function() {
     if (Session.get("canView")) {
-      return "btn-info"
+//      return "btn-info"
+      return "list-group-item-info"
     } else {
-      return "btn-default"
+      return ""
     }
   },
   canAdd: function() {
     if (Session.get("canAdd")) {
-      return "btn-info"
+      return "list-group-item-info"
     } else {
-      return "btn-default"
+      return ""
     }
   },
   canEdit: function() {
     if (Session.get("canEdit")) {
-      return "btn-info"
+      return "list-group-item-info"
     } else {
-      return "btn-default"
+      return ""
     }
   },
   canRemove: function() {
     if (Session.get("canRemove")) {
-      return "btn-info"
+      return "list-group-item-info"
     } else {
-      return "btn-default"
+      return ""
     }
   },
   isSuperUser: function() {
     if (Session.get("isSuperUser")) {
-      return "btn-info"
+      return "list-group-item-info"
     } else {
-      return "btn-default"
+      return ""
     }
   }
 });
@@ -86,13 +87,14 @@ Template.accountAdd.events({
   'click .btnCanView': function(e) {
     e.preventDefault();
     Session.set("canView", ! Session.get("canView"));
-
+/*
     if (Session.get("canView") === false) {
       Session.set("canAdd", false);
       Session.set("canEdit", false);
       Session.set("canRemove", false);
       Session.set("isSuperUser", false);
     }
+    */
   },
   'click .btnCanAdd' : function(e) {
     e.preventDefault();
@@ -100,12 +102,13 @@ Template.accountAdd.events({
 
     if (Session.get("canAdd")){
       Session.set("canView", true);
-    } else {
+    }
+    /*else {
       Session.set("canAdd", false);
       Session.set("canEdit", false);
       Session.set("canRemove", false);
       Session.set("isSuperUser", false);
-    }
+    } */
   },
   'click .btnCanEdit': function(e) {
     e.preventDefault();
@@ -113,24 +116,25 @@ Template.accountAdd.events({
 
     if (Session.get("canEdit")){
       Session.set("canView", true);
-      Session.set("canAdd", true);
-    } else {
+//      Session.set("canAdd", true);
+    }
+    /* else {
       Session.set("canRemove", false);
       Session.set("isSuperUser", false);
-    }
+    }*/
   },
   'click .btnCanRemove': function(e) {
     e.preventDefault();
     Session.set("canRemove", ! Session.get("canRemove"));
 
     if (Session.get("canRemove")){
-      Session.set("canView", true);
+/*      Session.set("canView", true);
       Session.set("canAdd", true);
-      Session.set("canEdit", true);
+      Session.set("canEdit", true); */
       Session.set("canRemove", true);
-    } else {
+    } /* else {
       Session.set("isSuperUser", false);
-    }
+    } */
   },
   'click .btnSuperUser': function(e) {
       e.preventDefault();

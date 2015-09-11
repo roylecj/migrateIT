@@ -5,7 +5,7 @@ Template.accountItem.helpers({
   canView: function() {
     var loggedInUser = this.username;
 
-    var perms = ['view', 'add', 'edit', 'remove', 'admin'];
+    var perms = ['view', 'admin'];
 
     var valid = Meteor.apply('checkPermission', [loggedInUser, perms], { returnStubValue: true });
 
@@ -18,7 +18,7 @@ Template.accountItem.helpers({
   canAdd: function() {
     var loggedInUser = this.username;
 
-    var perms = ['add', 'edit', 'remove', 'admin'];
+    var perms = ['add', 'admin'];
 
     var valid = Meteor.apply('checkPermission', [loggedInUser, perms], { returnStubValue: true });
 
@@ -31,7 +31,7 @@ Template.accountItem.helpers({
   canEdit: function() {
     var loggedInUser = this.username;
 
-    var perms = ['edit', 'remove', 'admin'];
+    var perms = ['edit', 'admin'];
 
     var valid = Meteor.apply('checkPermission', [loggedInUser, perms], { returnStubValue: true });
 
