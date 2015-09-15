@@ -1,0 +1,54 @@
+<template name="accountEdit">
+  <form class="main form page">
+
+<div class="hide">{{checkPermissions}}</div>
+
+  <div class="form-group">
+    <label class="control-label" for="loginName">Login</label>
+    <div class="controls">
+        <input name="loginName" id="loginName" type="text" value="{{username}}" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="userName">Person Name</label>
+    <div class="controls">
+        <input name="userName" id="userName" type="text" value="{{personName}}" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="email">Email Address</label>
+    <div class="controls">
+        <input name="email" id="email" type="text" value="{{emailAddress}}" placeholder="" class="form-control"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <div class="controls">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="resetPassword"> Reset Password
+          </label>
+        </div>
+      </div>
+  </div>
+
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+      Permissions
+    </div>
+    <div class="panel-body">
+      <div class="list-group">
+        <a class="list-group-item {{canView}} btnCanView"><span class="glyphicon glyphicon-search"></span> View</a>
+        <a class="list-group-item {{canAdd}} btnCanAdd"><span class="glyphicon glyphicon-plus"></span> Add</a>
+        <a class="list-group-item {{canEdit}} btnCanEdit"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+        <a class="list-group-item {{canRemove}} btnCanRemove"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+        <a class="list-group-item {{isSuperUser}} btnSuperUser"><span class="glyphicon glyphicon-star"></span> Super User</a>
+      </div>
+    </div>
+  </div>
+  <input type="submit" value="Submit" class="btn btn-primary"/>
+</form>
+
+</template>

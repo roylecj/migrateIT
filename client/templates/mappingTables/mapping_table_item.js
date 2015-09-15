@@ -21,5 +21,8 @@ Template.mappingTableItem.events({
     var mappingTable = this._id;
 
     Meteor.call('removeMappingTable', mappingTable);
+  },
+  'click .tableName': function(e) {
+    Router.go("mappingItems", {_id: this._id});
   }
 });

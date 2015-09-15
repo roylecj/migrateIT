@@ -1,21 +1,21 @@
 <template name="accountItem">
   <tr>
-    <td>
-      <a href="#">{{userPersonName}} ({{username}})</a>
+    <td class="dataColumn">
+      <a href="{{pathFor 'accountEdit'}}">{{userPersonName}} ({{username}})</a>
     </td>
-    <td>
+    <td class="dataColumn">
       <button class="btn btn-xs {{canView}} btnCanView"><span class="glyphicon glyphicon-search"></span></button>
     </td>
-    <td>
+    <td class="dataColumn">
       <button class="btn btn-xs {{canAdd}} btnCanAdd"><span class="glyphicon glyphicon-plus"></span></button>
     </td>
-    <td>
+    <td class="dataColumn">
       <button class="btn btn-xs {{canEdit}} btnCanEdit"><span class="glyphicon glyphicon-pencil"></span></button>
     </td>
-    <td>
+    <td class="dataColumn">
       <button class="btn btn-xs {{canRemove}} btnCanRemove"><span class="glyphicon glyphicon-remove"></span></button>
     </td>
-    <td>
+    <td class="dataColumn">
       <button class="btn btn-xs {{isSuperUser}} btnSuperUser"><span class="glyphicon glyphicon-star"></span></button>
     </td>
     <td>

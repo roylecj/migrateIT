@@ -1,4 +1,67 @@
 <template name="mappingItems">
+
+  <!--
+
+  start
+
+  -->
+
+    <div id="modalImport" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Import</h4>
+          </div>
+          <div class="modal-body">Data can be imported from a delimited file containing Old Code and New Code
+            {{> upload_bootstrap}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btnImport" data-dismiss="modal"><span class="glyphicon glyphicon-import"></span> Import</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalExport" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Export</h4>
+          </div>
+          <div class="modal-body">Data will be exported into a delimited file containing old codes and new codes.
+            <div class="radio">
+                <label>
+                  <input type="radio" name="optionExport" id="optionExportPipe" value="pipe" checked="">
+                  Pipe Delimited |
+                </label>
+            </div>
+
+            <div class="radio">
+                <label>
+                  <input type="radio" name="optionExport" id="optionExportTab" value="tab" checked="">
+                  Tab Delimited
+                </label>
+            </div>
+
+            <div class="radio">
+                <label>
+                  <input type="radio" name="optionExport" id="optionExportComma" value="comma" checked="">
+                  Comma Delimited
+                </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btnExport" data-dismiss="modal"><span class="glyphicon glyphicon-export"></span> Export</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  <!---
+  END...
+  -->
   <div class="panel panel-primary">
     <div class="panel-heading">
       {{#if editingTable}}
@@ -31,14 +94,23 @@
     </div>
     <div class="panel-footer">
       Mapping used for:
+      <div class="btn-toolbar">
       {{#each systems}}
         {{> mappingSystemItem}}
       {{/each}}
     </div>
+    </div>
   </div>
   <div class="panel panel-primary">
     <div class="panel-heading">Mappings
-      <button class="btn btn-xs {{includeOld}} pull-right btnMaps" id="oldMaps" name="oldMaps">{{oldMappingText}}</button>
+      <div class="btn-toolbar">
+        <button class="btn btn-xs {{includeOld}} pull-right btnMaps" id="oldMaps" name="oldMaps">{{oldMappingText}}</button>
+        {{#if isSuperUser}}
+          <button type="button" data-toggle="modal" data-target="#modalImport" class="btn btn-xs btn-info pull-right btnUpload"><span class="glyphicon glyphicon-import"></span> Import</button>
+          <button type="button" data-toggle="modal" data-target="#modalExport" class="btn btn-xs btn-info pull-right btnDownload"><span class="glyphicon glyphicon-export"></span> Export</button>
+        {{/if}}
+      </div>
+
     </div>
     <div class="panel-body">
     <table class="table table-hover table-striped">
@@ -72,11 +144,11 @@
 
             <td class="mappingOld" name="mappingOld">
               <input class="form-control oldCodeEdit {{editItem 'edit'}}" id="oldCodeEdit" name="oldCodeEdit" type="text" value="{{oldCode}}">
-              <span class="{{editItem 'view'}} mappingOldCode" name="mappingOldCode">{{oldCode}}</span>
+              <span class="{{editItem 'view'}} mappingOldCode {{showActiveRecord}}" name="mappingOldCode">{{oldCode}}</span>
             </td>
             <td class="mappingNew" name="mappingNew">
               <input class="form-control newCodeEdit {{editItem 'edit'}}" id="newCodeEdit" name="newCodeEdit" type="text" value="{{newCode}}">
-              <span class="{{editItem 'view' mappingNewCode}}" name="mappingNewCode">{{newCode}}</span>
+              <span class="{{editItem 'view' mappingNewCode}} {{showActiveRecord}}" name="mappingNewCode">{{newCode}}</span>
             </td>
             <td>
               {{#if canEdit}}

@@ -7,6 +7,14 @@ Template.mappingItems.onCreated(function() {
   Session.setDefault("editingRecord", this._id);
 });
 Template.mappingItems.helpers({
+  showActiveRecord: function() {
+
+    if (this.activeFlag) {
+      return ""
+    } else {
+      return "text-muted"
+    }
+  },
   isSuperUser: function() {
     var loggedInUser = Meteor.user().username;
     var perms = ['admin'];

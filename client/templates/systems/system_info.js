@@ -22,17 +22,24 @@ Template.systemInfo.helpers({
 
 Template.systemInfo.events({
   'click .btnEditSystem': function(e) {
-    var itemId = $(e.target.parentNode.parentNode.parentNode).find('[name=systemId]').text();
+    var itemId = $(e.target.parentNode.parentNode.parentNode.parentNode).find('[name=systemId]').text();
 
     if (itemId) {
       Session.set("editItem", itemId);
 
     }
   },
+  'click .systemNameColumn': function(e) {
+    var itemId = $(e.target).find('[name=systemId]').text();
+
+    if (itemId) {
+      Session.set("editItem", itemId);
+    }
+  },
   'click .btnSaveEdit': function(e) {
 
-    var itemId = $(e.target.parentNode.parentNode.parentNode).find('[name=systemId]').text();
-    var systemName = $(e.target.parentNode.parentNode.parentNode).find('[name=systemName]').val();
+    var itemId = $(e.target.parentNode.parentNode.parentNode.parentNode).find('[name=systemId]').text();
+    var systemName = $(e.target.parentNode.parentNode.parentNode.parentNode).find('[name=systemName]').val();
 
     Meteor.call('updateSystem', itemId, systemName);
     Session.set("editItem", "");
@@ -43,7 +50,7 @@ Template.systemInfo.events({
     Session.set("editItem", "");
   },
   'click .btnRemoveSystem': function(e) {
-    var systemId = $(e.target.parentNode.parentNode.parentNode).find('[name=systemId]').text();
+    var systemId = $(e.target.parentNode.parentNode.parentNode.parentNode).find('[name=systemId]').text();
 
     // Check that the table is not used anywhere...
 

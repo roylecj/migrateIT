@@ -1,5 +1,5 @@
 Template.accounts.helpers({
   account: function() {
-    return Meteor.users.find().fetch();
+    return Meteor.users.find({}, {sort: { username: 1 }}).fetch();
   }
 });

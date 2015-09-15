@@ -80,5 +80,8 @@ Template.accountItem.events({
         Meteor.call('removeUser', userId);
 
       }
+    },
+    'click .dataColumn': function(e) {
+      Router.go("accountEdit", {_id: this._id});
     }
 });
