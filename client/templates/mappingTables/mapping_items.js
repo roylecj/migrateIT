@@ -8,7 +8,6 @@ Template.mappingItems.onCreated(function() {
 });
 Template.mappingItems.helpers({
   showActiveRecord: function() {
-
     if (this.activeFlag) {
       return ""
     } else {
@@ -221,6 +220,10 @@ Template.mappingItems.events({
     newSearchString = e.target.value;
 
     Session.set("newCodeSearchString", newSearchString);
+  },
+  'click .btnDownload': function(e) {
+    // We can download the mappings here
+    Router.go('mappingDownload', {_id: this._id, title: this.tableName}); 
   },
   'click .btnReinstate': function(e) {
     var tableId;

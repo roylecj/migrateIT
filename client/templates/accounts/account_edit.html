@@ -27,9 +27,13 @@
   <div class="form-group">
       <div class="controls">
         <div class="checkbox">
-          <label>
-            <input type="checkbox" name="resetPassword"> Reset Password
-          </label>
+          <!-- <label class="resetPasswordInput"> -->
+            <button class="btn {{resetPasswordFlag}} resetPassword"><span class="glyphicon glyphicon-remove-circle"></span> Reset Password</button>
+<!--             <input type="checkbox" id="resetPassword" name="resetPassword" class="resetPassword"> Reset Password -->
+          <!-- </label> -->
+          {{#if passwordReset}}
+            <input name="password" id="password" type="password" />
+          {{/if}}
         </div>
       </div>
   </div>

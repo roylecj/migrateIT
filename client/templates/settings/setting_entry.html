@@ -1,0 +1,31 @@
+<template name="settingEntry">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Settings
+    </div>
+    <div class="panel-body">
+
+      <form class="main form page">
+
+      <div class="form-group">
+        <label class="control-label" for="mappingEndpointIP">Mapping Process IP Address</label>
+        <div class="controls">
+            <input name="mappingEndpointIP" id="mappingEndpointIP" type="text" value="{{endpointIP}}" placeholder="127.0.0.1" class="form-control mappingEndpointIP"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="mappingEndpointPort">Mapping Process Port Number</label>
+        <div class="controls">
+            <input name="mappingEndpointPort" id="mappingEndpointPort" type="text" value="{{endpointPort}}" placeholder="10000" class="form-control mappingEndpointPort"/>
+        </div>
+      </div>
+
+      <button class="btn {{connectionStatus}} btnTestConnection"><span class="glyphicon {{connectionIcon}}"></span> {{connectionText}}</button>
+      <button class="btn btn-primary btnSaveDetails"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+
+      </form>
+    </div>
+  </div>
+
+</template>

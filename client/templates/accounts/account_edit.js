@@ -1,3 +1,6 @@
+Template.accountEdit.onCreated(function() {
+    Session.setDefault("resetPasswordFlag", false);
+});
 
 Template.accountEdit.helpers({
     personName: function() {
@@ -87,6 +90,16 @@ Template.accountEdit.helpers({
       } else {
         return ""
       }
+    },
+    resetPassword: function() {
+      return Session.get("resetPasswordFlag");
+    },
+    resetPasswordFlag: function() {
+      if (Session.get("resetPasswordFlag")) {
+        return "btn-success"
+      } else {
+        return "btn-info"
+      }
     }
 });
 
@@ -144,6 +157,10 @@ Template.accountEdit.events({
   'click .btnCanRemove': function(e) {
     e.preventDefault();
     Session.set("canRemove", ! Session.get("canRemove"));
+  },
+  'click resetPassword': function(e) {
+    e.preventDefault();
+    Session.set("passwordResetFlag", true);
   },
   'click .btnSuperUser': function(e) {
     e.preventDefault();

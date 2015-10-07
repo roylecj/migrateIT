@@ -23,42 +23,6 @@
       </div>
     </div>
 
-    <div id="modalExport" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Export</h4>
-          </div>
-          <div class="modal-body">Data will be exported into a delimited file containing old codes and new codes.
-            <div class="radio">
-                <label>
-                  <input type="radio" name="optionExport" id="optionExportPipe" value="pipe" checked="">
-                  Pipe Delimited |
-                </label>
-            </div>
-
-            <div class="radio">
-                <label>
-                  <input type="radio" name="optionExport" id="optionExportTab" value="tab" checked="">
-                  Tab Delimited
-                </label>
-            </div>
-
-            <div class="radio">
-                <label>
-                  <input type="radio" name="optionExport" id="optionExportComma" value="comma" checked="">
-                  Comma Delimited
-                </label>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary btnExport" data-dismiss="modal"><span class="glyphicon glyphicon-export"></span> Export</button>
-            </div>
-        </div>
-      </div>
-    </div>
-
   <!---
   END...
   -->
@@ -105,10 +69,12 @@
     <div class="panel-heading">Mappings
       <div class="btn-toolbar">
         <button class="btn btn-xs {{includeOld}} pull-right btnMaps" id="oldMaps" name="oldMaps">{{oldMappingText}}</button>
+<!--
         {{#if isSuperUser}}
           <button type="button" data-toggle="modal" data-target="#modalImport" class="btn btn-xs btn-info pull-right btnUpload"><span class="glyphicon glyphicon-import"></span> Import</button>
-          <button type="button" data-toggle="modal" data-target="#modalExport" class="btn btn-xs btn-info pull-right btnDownload"><span class="glyphicon glyphicon-export"></span> Export</button>
+          <button type="button" class="btn btn-xs btn-info pull-right btnDownload"><span class="glyphicon glyphicon-export"></span> Export</button>
         {{/if}}
+-->
       </div>
 
     </div>
