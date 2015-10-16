@@ -1,13 +1,20 @@
 Template.accountEdit.onCreated(function() {
-    Session.setDefault("resetPasswordFlag", false);
+    Session.set("resetPasswordFlag", false);
+    Session.set("activeFlag", true);
 });
 
 Template.accountEdit.helpers({
     personName: function() {
       return this.profile.name;
     },
+    activeUser: function() {
+      return Session.get("activeFlag");
+    },
     emailAddress: function() {
       return this.emails[0].address;
+    },
+    passwordReset: function() {
+      return Session.get("passwordResetFlag");
     },
     checkPermissions: function() {
       // This will check the permissions for the user and assign it here...
@@ -94,6 +101,20 @@ Template.accountEdit.helpers({
     resetPassword: function() {
       return Session.get("resetPasswordFlag");
     },
+    passwordResetText: function() {
+      if (Session.get("resetPasswordFlag") === false) {
+        return "Reset Password"
+      } else {
+        return "Password Reset"
+      }
+    },
+    passwordResetStatus: function() {
+      if (Session.get("resetPasswordFlag") === false) {
+        return "btn-info"
+      } else {
+        return "btn-success"
+      }
+    },
     resetPasswordFlag: function() {
       if (Session.get("resetPasswordFlag")) {
         return "btn-success"
@@ -158,9 +179,14 @@ Template.accountEdit.events({
     e.preventDefault();
     Session.set("canRemove", ! Session.get("canRemove"));
   },
-  'click resetPassword': function(e) {
+  'click .resetPassword': function(e) {
     e.preventDefault();
+    console.log("password is being reset");
     Session.set("passwordResetFlag", true);
+  },
+  'click .resetPasswordSuccess': function(e) {
+    e.preventDefault();
+    Session.set("passwordResetFlag", false);
   },
   'click .btnSuperUser': function(e) {
     e.preventDefault();
@@ -173,5 +199,13 @@ Template.accountEdit.events({
       Session.set("canRemove", true);
       Session.set("isSuperUser", true);
     }
+  },
+  'click .activeFlag': function(e) {
+    e.preventDefault();
+    Session.set("activeFlag", true);
+  },
+  'click .inactiveFlag': function(e) {
+    e.preventDefault();
+    Session.set("activeFlag", false);
   }
 });

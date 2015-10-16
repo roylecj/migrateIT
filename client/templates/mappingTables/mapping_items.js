@@ -223,7 +223,10 @@ Template.mappingItems.events({
   },
   'click .btnDownload': function(e) {
     // We can download the mappings here
-    Router.go('mappingDownload', {_id: this._id, title: this.tableName}); 
+//    Router.go('mappingDownload', {_id: this._id, title: this.tableName});
+
+    console.log("downloading...");
+    Meteor.call('saveExcel', this.tableName);
   },
   'click .btnReinstate': function(e) {
     var tableId;

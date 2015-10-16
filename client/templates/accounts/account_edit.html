@@ -3,6 +3,7 @@
 
 <div class="hide">{{checkPermissions}}</div>
 
+
   <div class="form-group">
     <label class="control-label" for="loginName">Login</label>
     <div class="controls">
@@ -24,20 +25,6 @@
     </div>
   </div>
 
-  <div class="form-group">
-      <div class="controls">
-        <div class="checkbox">
-          <!-- <label class="resetPasswordInput"> -->
-            <button class="btn {{resetPasswordFlag}} resetPassword"><span class="glyphicon glyphicon-remove-circle"></span> Reset Password</button>
-<!--             <input type="checkbox" id="resetPassword" name="resetPassword" class="resetPassword"> Reset Password -->
-          <!-- </label> -->
-          {{#if passwordReset}}
-            <input name="password" id="password" type="password" />
-          {{/if}}
-        </div>
-      </div>
-  </div>
-
   <div class="panel panel-primary">
       <div class="panel-heading">
       Permissions
@@ -52,6 +39,42 @@
       </div>
     </div>
   </div>
+
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+      Actions
+    </div>
+    <div class="panel-body">
+
+      <div class="form-group">
+        <div class="controls">
+            {{#if passwordReset}}
+              <button class="btn btn-success resetPasswordSuccess"><span class="glyphicon glyphicon-ok"></span> Password Reset</button>
+
+            {{else}}
+              <button class="btn btn-info resetPassword"><span class="glyphicon glyphicon-remove-circle"></span> Reset Password</button>
+            {{/if}}
+
+            {{#if activeUser}}
+              <button class="btn btn-info activeFlag">Deactivate User</button>
+            {{else}}
+              <button class="btn btn-danger inactiveFlag">Activate User</button>
+            {{/if}}
+        </div>
+        <div class="controls">
+          {{#if passwordReset}}
+          <label class="control-label">User is prompted to enter a new password on login</label>
+          {{/if}}
+          {{#if activeUser}}
+          {{else}}
+          <label class="control-label">User is locked out</label>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <input type="submit" value="Submit" class="btn btn-primary"/>
 </form>
 
