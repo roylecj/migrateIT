@@ -18,6 +18,22 @@ Template.header.helpers({
     } else {
       return false;
     }
+  },
+  unreadTasks: function() {
+    var userId = Meteor.user()._id;
+
+    console.log("userid= " + userId);
+
+    if (Tasks.find({user: userId, seenFlag: false, completeFlag: false}).count() > 0) {
+      return true
+    } else {
+      return false
+    }
+  },
+  taskCount: function() {
+    var userId = Meteor.user()._id;
+
+    return Tasks.find({user: userId, seenFlag: false, completeFlag: false}).count()
   }
 });
 

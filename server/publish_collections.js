@@ -29,3 +29,7 @@ Meteor.publish('systemDetails', function() {
 Meteor.publish('mappingTableSystems', function() {
     return MappingTableSystems.find();
 });
+
+Meteor.publish('tasks', function() {
+    return Tasks.find();
+})

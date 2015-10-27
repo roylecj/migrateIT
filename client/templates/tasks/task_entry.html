@@ -1,0 +1,30 @@
+<template name="taskEntry">
+    <tr>
+      <td>
+        <h4>
+          {{#if seenFlag}}
+            {{description}}
+          {{else}}
+            <b>{{description}}</b>
+          {{/if}}
+        </h4>
+        {{#if differentAssignee}}
+        <div class="label label-info pull-right">Assigned by {{assignedByUser}}</div>
+        {{/if}}
+        <div class="label label-info">{{dateReceived}}</div>
+        {{#if completeFlag}}
+          <div class="label label-success">Completed {{completeDate}}</div>
+        {{/if}}
+        {{notes}}
+      </td>
+      <td class="actionButtonColumn">
+        <div class="btn-toolbar">
+          <button type="button" class="btn btn-xs pull-right btn-danger btnDelete" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete Task"><span class="glyphicon glyphicon-remove"></span></button>
+          {{#if completeFlag}}
+          {{else}}
+          <button type="button" class="btn btn-xs pull-right btn-info btnMarkComplete" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as Complete"><span class="glyphicon glyphicon-ok"></span></button>
+          {{/if}}
+        </div>
+      </td>
+    </tr>
+</template>

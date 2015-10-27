@@ -9,6 +9,13 @@
     profile: { name: 'Chris Royle'}
   });
 
+  var userId2 = Accounts.createUser({
+    username: 'ibell',
+    password: '08board',
+    email: 'ibell@csc.com',
+    profile: { name: 'Ian Bell'}
+  });
+
   Roles.createRole('admin');
   Roles.createRole('view');
   Roles.createRole('edit');
@@ -80,5 +87,30 @@
     activeFlag: true,
     createdAt: new Date(),
     createdBy: 'croyle3@csc.com'
+  });
+
+  Tasks.insert({
+    user: userId,
+    description: 'Need to setup new mapping table for Religion codes.',
+    notes: 'This is some more information about the task that we need to do',
+    createdAt: new Date(),
+    createdBy: 'croyle3@csc.com',
+    assignedBy: userId2,
+    seenFlag: false,
+    completeFlag: false,
+    removedFlag: false
+  });
+
+  Tasks.insert({
+    user: userId,
+    description: 'Another task for something',
+    notes: 'This is some more information about the task that we need to do',
+    createdAt: new Date(),
+    createdBy: 'croyle3@csc.com',
+    assignedBy: userId,
+    seenFlag: true,
+    completedAt: new Date(),
+    completeFlag: true,
+    removedFlag: false
   });
 }

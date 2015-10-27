@@ -1,0 +1,52 @@
+<template name="taskList">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Tasks
+      <div class="btn-toolbar">
+      <button class="btn btn-xs {{completeState}} pull-right btnIncludeCompleted">{{includeCompletedText}}</button>
+      <button class="btn btn-xs btn-info pull-right {{disableButton}} btnAddTask"><span class="glyphicon glyphicon-plus"></span> Add Task</button>
+    </div>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <tbody>
+
+          {{#if newRecord}}
+            <tr>
+              <td>
+                  <form class="main form page">
+                <div class="form-group">
+                  <label class="control-label">New Task</label>
+                <input class="form-control" id="taskDescription" name="taskDescription" type="text" value="" placeholder="Task Description">
+                <input class="form-control" id="taskDetail" name="taskDetail" type="text" value="" placeholder="Notes">
+                <button class="btn btn-xs {{personalTaskState}} btnPersonalTask" id="btnPersonalTask">{{personalTaskText}}</button>
+
+                {{#if notPersonalTask}}
+                <select class="form-control" id="select">
+                  {{#each userList}}
+                    <option>{{personName}}</option>
+                  {{/each}}
+                </select>
+                {{/if}}
+                </div>
+              </form>
+              </td>
+              <td>
+                <div class="btn-toolbar">
+                <button class="btn btn-xs btn-danger btnCancelTask pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+                <button class="btn btn-xs btn-info btnSaveTask pull-right"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+              </td>
+            </tr>
+          {{/if}}
+
+          {{#each tasks}}
+            {{> taskEntry}}
+          {{/each}}
+      </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</template>

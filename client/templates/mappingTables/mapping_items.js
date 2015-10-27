@@ -223,10 +223,11 @@ Template.mappingItems.events({
   },
   'click .btnDownload': function(e) {
     // We can download the mappings here
-//    Router.go('mappingDownload', {_id: this._id, title: this.tableName});
 
     console.log("downloading...");
-    Meteor.call('saveExcel', this.tableName);
+    Router.go('mappingDownload', {_id: this._id, title: this.tableName});
+
+//    Meteor.call('saveExcel', this.tableName);
   },
   'click .btnReinstate': function(e) {
     var tableId;
@@ -278,7 +279,7 @@ Template.mappingItems.events({
     }
   },
   'click .btnMaps': function(e) {
-    console.log("old maps clicked");
+//    console.log("old maps clicked");
 
     if (Session.get("includeOldMappings")) {
       Session.set("includeOldMappings", false);
