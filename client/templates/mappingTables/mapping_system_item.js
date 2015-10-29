@@ -15,6 +15,20 @@ Template.mappingSystemItem.helpers({
     } else {
       return "btn-default"
     }
+  },
+  isUsedFlag: function() {
+    var isUsedFlag = 0;
+    isUsedFlag = MappingTableSystems.find({
+      systemId: this._id,
+      tableId: Session.get("editingRecord"),
+      activeFlag: true
+    }).count();
+
+    if (isUsedFlag > 0) {
+      return true
+    } else {
+      return false
+    }
   }
 });
 

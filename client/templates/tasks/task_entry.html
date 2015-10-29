@@ -1,6 +1,24 @@
 <template name="taskEntry">
+  <div id="modalCompleteNotes" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Completion Notes</h4>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btnImport" data-dismiss="modal"><span class="glyphicon glyphicon-import"></span> Import</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
     <tr>
       <td>
+        <div class="hidden" id="taskId">{{_id}}</div>
         <h4>
           {{#if seenFlag}}
             {{description}}
@@ -21,6 +39,7 @@
         <div class="btn-toolbar">
           <button type="button" class="btn btn-xs pull-right btn-danger btnDelete" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete Task"><span class="glyphicon glyphicon-remove"></span></button>
           {{#if completeFlag}}
+          <button type="button" class="btn btn-xs pull-right btn-info btnReinstate" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reinstate"><span class="glyphicon glyphicon-pencil"></span></button>
           {{else}}
           <button type="button" class="btn btn-xs pull-right btn-info btnMarkComplete" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as Complete"><span class="glyphicon glyphicon-ok"></span></button>
           {{/if}}

@@ -18,5 +18,36 @@ Template.taskEntry.helpers({
 Template.taskEntry.events({
     'click .btnMarkComplete': function(e, t) {
 
+        var taskId = "";
+
+        var pageHTML;
+
+        pageHTML = e.target.parentNode.parentNode.parentNode.parentNode
+
+        taskId = $(pageHTML).find("[id='taskId']").text();
+
+        Meteor.call('completeTask', taskId);
+    },
+    'click .btnReinstate': function(e, t) {
+      var taskId = "";
+
+      var pageHTML;
+
+      pageHTML = e.target.parentNode.parentNode.parentNode.parentNode
+
+      taskId = $(pageHTML).find("[id='taskId']").text();
+
+      Meteor.call('reinstateTask', taskId);
+    },
+    'click .btnDelete': function(e, t) {
+      var taskId = "";
+
+      var pageHTML;
+
+      pageHTML = e.target.parentNode.parentNode.parentNode.parentNode
+
+      taskId = $(pageHTML).find("[id='taskId']").text();
+
+      Meteor.call('deleteTask', taskId);
     }
 });

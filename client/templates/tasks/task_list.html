@@ -16,21 +16,22 @@
             <tr>
               <td>
                   <form class="main form page">
-                <div class="form-group">
-                  <label class="control-label">New Task</label>
-                <input class="form-control" id="taskDescription" name="taskDescription" type="text" value="" placeholder="Task Description">
-                <input class="form-control" id="taskDetail" name="taskDetail" type="text" value="" placeholder="Notes">
-                <button class="btn btn-xs {{personalTaskState}} btnPersonalTask" id="btnPersonalTask">{{personalTaskText}}</button>
+                    <div class="form-group">
+                      <label class="control-label">New Task</label>
+                    <input class="form-control" id="taskDescription" name="taskDescription" type="text" value="" placeholder="Task Description">
+                    <input class="form-control" id="taskDetail" name="taskDetail" type="text" value="" placeholder="Notes">
+                    <button class="btn btn-xs {{personalTaskState}} btnPersonalTask" id="btnPersonalTask">{{personalTaskText}}</button>
 
-                {{#if notPersonalTask}}
-                <select class="form-control" id="select">
-                  {{#each userList}}
-                    <option>{{personName}}</option>
-                  {{/each}}
-                </select>
-                {{/if}}
-                </div>
-              </form>
+                    {{#if notPersonalTask}}
+                      <select class="form-control" id="select" name="userSelect">
+                        {{#each userList}}
+                          <option id="{{username}}">{{personName}}</option>
+                        {{/each}}
+                      </select>
+                    {{/if}}
+
+                    </div>
+                  </form>
               </td>
               <td>
                 <div class="btn-toolbar">

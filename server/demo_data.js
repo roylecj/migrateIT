@@ -23,6 +23,7 @@
   Roles.createRole('remove');
 
   Roles.addUsersToRoles(userId, ['admin']);
+  Roles.addUsersToRoles(userId2, ['admin']);
 
   var wpid = SystemDetails.insert({
     systemName: 'webPAS',
