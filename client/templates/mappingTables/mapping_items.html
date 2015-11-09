@@ -72,7 +72,8 @@
 
         {{#if isSuperUser}}
           <button type="button" data-toggle="modal" data-target="#modalImport" class="btn btn-xs btn-info pull-right btnUpload"><span class="glyphicon glyphicon-import"></span> Import</button>
-          <button type="button" class="btn btn-xs btn-info pull-right btnDownload"><span class="glyphicon glyphicon-export"></span> Export</button>
+<!--          <button type="button" class="btn btn-xs btn-info pull-right btnDownload"><span class="glyphicon glyphicon-export"></span> Export</button> -->
+          <a href="{{pathFor route='mappingDownload' data=currentEntry}}" class="btn btn-xs btn-info pull-right" target="_blank"><span class="glyphicon glyphicon-export"></span> Export</a>
         {{/if}}
 
       </div>

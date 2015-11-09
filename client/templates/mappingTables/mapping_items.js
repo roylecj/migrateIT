@@ -19,6 +19,11 @@ Template.mappingItems.helpers({
       return "text-muted"
     }
   },
+  currentEntry: function() {
+    return {
+      _id: this._id,
+      title: this.tableName}
+  },
   isSuperUser: function() {
     var loggedInUser = Meteor.user().username;
     var perms = ['admin'];
