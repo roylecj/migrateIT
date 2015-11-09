@@ -1,3 +1,7 @@
+Template.mappingItems.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
+});
+
 Template.mappingItems.onCreated(function() {
   Session.setDefault("textChanged", false);
   Session.setDefault("editItem", "");
@@ -6,6 +10,7 @@ Template.mappingItems.onCreated(function() {
   Session.setDefault("columnSort", "oldCode");
   Session.setDefault("editingRecord", this._id);
 });
+
 Template.mappingItems.helpers({
   showActiveRecord: function() {
     if (this.activeFlag) {

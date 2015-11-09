@@ -1,3 +1,7 @@
+Template.accountItem.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
+});
+
 Template.accountItem.helpers({
   userPersonName: function() {
     return this.profile.name;

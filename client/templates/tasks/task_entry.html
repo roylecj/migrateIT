@@ -7,7 +7,7 @@
           <h4 class="modal-title">Completion Notes</h4>
         </div>
         <div class="modal-body">
-          
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary btnImport" data-dismiss="modal"><span class="glyphicon glyphicon-import"></span> Import</button>
@@ -37,13 +37,17 @@
       </td>
       <td class="actionButtonColumn">
         <div class="btn-toolbar">
-          <button type="button" class="btn btn-xs pull-right btn-danger btnDelete" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete Task"><span class="glyphicon glyphicon-remove"></span></button>
+          <button type="button" class="btn btn-xs pull-right btn-danger btnDelete" data-toggle="tooltip" title="Delete Task"><span class="glyphicon glyphicon-remove"></span></button>
           {{#if completeFlag}}
-          <button type="button" class="btn btn-xs pull-right btn-info btnReinstate" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reinstate"><span class="glyphicon glyphicon-pencil"></span></button>
+          <button type="button" class="btn btn-xs pull-right btn-info btnReinstate" data-toggle="tooltip" title="Reinstate"><span class="glyphicon glyphicon-pencil"></span></button>
           {{else}}
-          <button type="button" class="btn btn-xs pull-right btn-info btnMarkComplete" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as Complete"><span class="glyphicon glyphicon-ok"></span></button>
+          <button type="button" class="btn btn-xs pull-right btn-warning btnEdit" data-toggle="tooltip" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button>
+          <button type="button" class="btn btn-xs pull-right btn-info btnMarkComplete" data-toggle="tooltip" title="Mark as Complete"><span class="glyphicon glyphicon-ok"></span></button>
           {{/if}}
         </div>
       </td>
     </tr>
+
+    {{> tooltips }}
+
 </template>

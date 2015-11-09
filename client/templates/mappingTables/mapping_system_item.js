@@ -1,3 +1,7 @@
+Template.mappingSystemItem.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
+});
+
 Template.mappingSystemItem.helpers({
   editingTable: function() {
     return Session.get("editingTable");

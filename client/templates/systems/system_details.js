@@ -1,3 +1,7 @@
+Template.systemDetails.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});  
+});
+
 Template.systemDetails.helpers({
   systems: function() {
     return SystemDetails.find({activeFlag: true}).fetch();

@@ -1,11 +1,11 @@
 <template name="mappingTableItem">
   <tr>
     <td class="tableName">
-      <a href="{{pathFor 'mappingItems'}}">{{tableName}}</a>
+      <a href="{{pathFor 'mappingItems'}}" data-toggle="tooltip" title="Edit {{tableName}} table">{{tableName}}</a>
       <span class="badge">{{mappingCount}}</span>
     </td>
     <td>
-      <button class="btn btn-xs pull-right btn-danger {{removeDisabled}} btnRemoveTable"><span class="glyphicon glyphicon-remove"></span></button>
+      <button class="btn btn-xs pull-right btn-danger {{removeDisabled}} btnRemoveTable" data-toggle="tooltip" title="Remove Mapping Table"><span class="glyphicon glyphicon-remove"></span></button>
     </td>
   </tr>
 </template>

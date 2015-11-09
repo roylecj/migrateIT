@@ -3,7 +3,7 @@
   <button class="btn btn-xs {{isUsed}} btnSystem" name="btnSystem">{{systemName}}
     {{#if editingTable}}
       {{#if isUsedFlag}}
-        <span class="glyphicon glyphicon-remove"></span>
+        <span data-toggle="tooltip" title="Remove" class="glyphicon glyphicon-remove"></span>
       {{/if}}
     {{/if}}
   </button>

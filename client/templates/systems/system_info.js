@@ -1,6 +1,11 @@
 Template.systemInfo.onCreated(function() {
   Session.setDefault("editItem", "");
 });
+
+Template.systemInfo.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});  
+});
+
 Template.systemInfo.helpers({
   editItem: function(viewState) {
 

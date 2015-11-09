@@ -37,15 +37,15 @@
             <td>
             </td>
             <td>
-              <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnSave"></button>
-              <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnCancel"></button>
+              <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnSave" data-toggle="tooltip" title="Save"></button>
+              <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnCancel" data-toggle="tooltip" title="Cancel"></button>
             </td>
           </tr>
         </table>
       {{else}}
         {{tableName}}
         {{#if isSuperUser}}
-          <button class="glyphicon glyphicon-pencil btn-xs btn-info pull-right btnEdit"></button>
+          <button class="glyphicon glyphicon-pencil btn-xs btn-info pull-right btnEdit" data-toggle="tooltip" title="Edit Table"></button>
         {{/if}}
       {{/if}}
     </div>
@@ -120,15 +120,15 @@
               {{#if canEdit}}
               {{#if activeRecord}}
                 {{#if canRemove}}
-                  <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnRemove {{editItem 'view'}}"></button>
+                  <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnRemove {{editItem 'view'}}" data-toggle="tooltip" title="Remove Mapping"></button>
                 {{/if}}
               {{else}}
                 {{#if canRemove}}
-                  <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnReinstate {{editItem 'view'}}"></button>
+                  <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnReinstate {{editItem 'view'}}" data-toggle="tooltip" title="Reinstate Mapping"></button>
                 {{/if}}
               {{/if}}
-              <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnEditSave {{editItem 'edit'}}"></button>
-              <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnEditCancel {{editItem 'edit'}}"></button>
+              <button class="glyphicon glyphicon-ok btn-xs btn-success pull-right btnEditSave {{editItem 'edit'}}" data-toggle="tooltip" title="Save"></button>
+              <button class="glyphicon glyphicon-remove btn-xs btn-danger pull-right btnEditCancel {{editItem 'edit'}}" data-toggle="tooltip" title="Cancel"></button>
               {{/if}}
             </td>
         </tr>

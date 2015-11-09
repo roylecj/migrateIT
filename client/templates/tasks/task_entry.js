@@ -1,3 +1,7 @@
+Template.taskEntry.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
+});
+
 Template.taskEntry.helpers({
     dateReceived: function() {
       return moment(this.createdAt).fromNow()

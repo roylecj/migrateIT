@@ -1,3 +1,7 @@
+Template.mappingTableItem.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
+});
+
 Template.mappingTableItem.helpers({
   mappingCount: function() {
     return MappingTableItems.find({tableId: this._id, activeFlag: true}).count();

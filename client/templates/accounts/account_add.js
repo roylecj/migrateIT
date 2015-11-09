@@ -81,7 +81,7 @@ Template.accountAdd.events({
     Session.set("canEdit", false);
     Session.set("canRemove", false);
     Session.set("isSuperUser", false);
-                
+
     Router.go("accounts");
   },
   'click .btnCanView': function(e) {

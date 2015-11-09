@@ -1,3 +1,6 @@
+Template.mappingTableAdd.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
+});
 Template.mappingTableAdd.helpers({
 
 });

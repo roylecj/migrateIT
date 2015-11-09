@@ -1,7 +1,7 @@
 <template name="accountItem">
   <tr>
     <td class="dataColumn">
-      <a href="{{pathFor 'accountEdit'}}">{{userPersonName}} ({{username}})</a>
+      <a href="{{pathFor 'accountEdit'}}" data-toggle="tooltip" title="Edit {{userPersonName}}">{{userPersonName}} ({{username}})</a>
     </td>
     <td class="dataColumn">
       <button class="btn btn-xs {{canView}} btnCanView"><span class="glyphicon glyphicon-search"></span></button>
@@ -20,7 +20,7 @@
     </td>
     <td>
       <span class="hide" name="currentUser" id="currentUser">{{username}}</span>
-      <button class="btn btn-xs btn-danger btnRemoveUser"><span class="glyphicon glyphicon-remove"></span></button>
+      <button class="btn btn-xs btn-danger btnRemoveUser" data-toggle="tooltip" title="Remove user"><span class="glyphicon glyphicon-remove"></span></button>
     </td>
   </tr>
 </template>

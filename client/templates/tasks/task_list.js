@@ -4,6 +4,9 @@ Template.taskList.onCreated(function() {
     Session.setDefault("personalTask", true);
 });
 
+Template.taskList.onRendered(function() {
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
+});
 
 Template.taskList.helpers({
   tasks: function() {

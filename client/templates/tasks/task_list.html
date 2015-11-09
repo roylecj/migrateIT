@@ -3,7 +3,7 @@
     <div class="panel-heading">
       Tasks
       <div class="btn-toolbar">
-      <button class="btn btn-xs {{completeState}} pull-right btnIncludeCompleted">{{includeCompletedText}}</button>
+      <button class="btn btn-xs {{completeState}} pull-right btnIncludeCompleted" data-toggle="tooltip" data-original-title="Include Completed Tasks">{{includeCompletedText}}</button>
       <button class="btn btn-xs btn-info pull-right {{disableButton}} btnAddTask"><span class="glyphicon glyphicon-plus"></span> Add Task</button>
     </div>
     </div>
@@ -40,6 +40,10 @@
               </div>
               </td>
             </tr>
+          {{else}}
+            {{#if editRecord}}
+
+            {{/if}}
           {{/if}}
 
           {{#each tasks}}
