@@ -16,7 +16,36 @@
     </div>
   </div>
 
-  <input type="submit" value="Submit" class="btn btn-primary"/>
+<!--
+  {{#if showPassword}}
+    <div class="form-group">
+      <label class="control-label" for="newPassword">New Password</label>
+      <div class="controls">
+          <input name="newPassword" id="newPassword" type="password" value="" placeholder="" class="form-control newPassword"/>
+      </div>
+    </div>
+
+    <div class="form-group {{correctState}}">
+      <label class="control-label" for="confirmPassword">Confirm Password</label>
+      {{#if passwordError}}
+        <span class="label label-danger">Passwords do not match</span>
+      {{/if}}
+      <div class="controls">
+          <input name="confirmPassword" id="confirmPassword" type="password" value="" placeholder="" class="form-control confirmPassword"/>
+      </div>
+    </div>
+  {{/if}}
+-->
+  <input type="submit" value="Login" class="btn btn-primary"/>
+
+<!--
+  {{#if showPassword}}
+    <button class="btn btn-info updatePassword">Update Password</button>
+  {{else}}
+    <button class="btn btn-danger changePassword">Change Password</button>
+  {{/if}}
+-->
+
 </form>
 
 </template>

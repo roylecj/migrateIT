@@ -1,5 +1,5 @@
 Template.systemDetails.onRendered(function() {
-  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});  
+  $('[data-toggle="tooltip"]').tooltip({placement: 'bottom'});
 });
 
 Template.systemDetails.helpers({
@@ -29,8 +29,7 @@ Template.systemDetails.events({
     // First of all validate it...
 
     var systemName = "";
-
-    systemName = $(e.target.parentNode.parentNode.parentNode).find('[name=newSystemName]').val();
+    systemName = $(e.target.parentNode.parentNode.parentNode.parentNode).find('[name=newSystemName]').val();
     var errorFlag = false;
 
     if (!systemName) {

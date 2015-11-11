@@ -1,6 +1,11 @@
 Template.accountEdit.onCreated(function() {
-    Session.set("resetPasswordFlag", false);
-    Session.set("activeFlag", true);
+    Session.setDefault("resetPasswordFlag", false);
+    Session.setDefault("activeFlag", true);
+});
+
+Template.accountEdit.onRendered(function() {
+  Session.set("resetPasswordFlag", false);
+  Session.set("activeFlag", true);
 });
 
 Template.accountEdit.helpers({
@@ -15,6 +20,9 @@ Template.accountEdit.helpers({
     },
     passwordReset: function() {
       return Session.get("passwordResetFlag");
+    },
+    newPassword: function() {
+      return Session.get("newPassword");
     },
     checkPermissions: function() {
       // This will check the permissions for the user and assign it here...
@@ -130,6 +138,7 @@ Template.accountEdit.events({
 
     // Save the user...
 
+    var userId = this._id;
     var loginName = $('[name=loginName]').val();
     var emailAddress = $('[name=email]').val();
     var personName = $('[name=userName]').val();
@@ -151,9 +160,7 @@ Template.accountEdit.events({
       perms.push("view");
     };
 
-//    Meteor.call('updateUser', userId, loginName, emailAddress, personName, perms);
-
-    console.log("Updating User");
+    Meteor.call('updateUser', userId, loginName, emailAddress, personName, perms);
 
     Session.set("canView", false);
     Session.set("canAdd", false);
@@ -161,7 +168,14 @@ Template.accountEdit.events({
     Session.set("canRemove", false);
     Session.set("isSuperUser", false);
 
-    Router.go("accounts");
+    // If we are changing the rights that a user has, and we are that users then we
+    // need to go home, as we may not have access anymore...
+
+    if (userId === Meteor.userId) {
+      Router.go("home")
+    } else {
+      Router.go("accounts");
+    }
   },
   'click .btnCanView': function(e) {
     e.preventDefault();
@@ -181,7 +195,20 @@ Template.accountEdit.events({
   },
   'click .resetPassword': function(e) {
     e.preventDefault();
-    console.log("password is being reset");
+//    debugger
+    var userId = this._id;
+
+    console.log(userId);
+
+    // var newPasswd = Meteor.apply('updatePassword', [userId], { returnStubValue: true });
+
+    Meteor.call('updatePassword', userId, function(e, res) {
+        console.log("error=" + e);
+        console.log("result=" + res);
+
+        Session.set("newPassword", res);
+    });
+//    Session.set("newPassword", newPasswd);
     Session.set("passwordResetFlag", true);
   },
   'click .resetPasswordSuccess': function(e) {
@@ -202,10 +229,13 @@ Template.accountEdit.events({
   },
   'click .activeFlag': function(e) {
     e.preventDefault();
-    Session.set("activeFlag", true);
+    console.log("setting active flag");
+    Session.set("activeFlag", false);
   },
   'click .inactiveFlag': function(e) {
     e.preventDefault();
-    Session.set("activeFlag", false);
+    console.log("unsetting active flag");
+
+    Session.set("activeFlag", true);
   }
 });

@@ -30,6 +30,7 @@
       Permissions
     </div>
     <div class="panel-body">
+      {{#if activeUser}}
       <div class="list-group">
         <a class="list-group-item {{canView}} btnCanView"><span class="glyphicon glyphicon-search"></span> View</a>
         <a class="list-group-item {{canAdd}} btnCanAdd"><span class="glyphicon glyphicon-plus"></span> Add</a>
@@ -37,6 +38,9 @@
         <a class="list-group-item {{canRemove}} btnCanRemove"><span class="glyphicon glyphicon-remove"></span> Remove</a>
         <a class="list-group-item {{isSuperUser}} btnSuperUser"><span class="glyphicon glyphicon-star"></span> Super User</a>
       </div>
+      {{else}}
+        <span class="label label-danger">User is locked out</span>
+      {{/if}}
     </div>
   </div>
 
@@ -49,8 +53,7 @@
       <div class="form-group">
         <div class="controls">
             {{#if passwordReset}}
-              <button class="btn btn-success resetPasswordSuccess"><span class="glyphicon glyphicon-ok"></span> Password Reset</button>
-
+              <button class="btn btn-success resetPasswordSuccess">Password Reset</button>
             {{else}}
               <button class="btn btn-info resetPassword"><span class="glyphicon glyphicon-remove-circle"></span> Reset Password</button>
             {{/if}}
@@ -63,11 +66,9 @@
         </div>
         <div class="controls">
           {{#if passwordReset}}
-          <label class="control-label">User is prompted to enter a new password on login</label>
-          {{/if}}
-          {{#if activeUser}}
-          {{else}}
-          <label class="control-label">User is locked out</label>
+          <label class="control-label">Password has been reset to</label>
+          <span class="label label-info">{{newPassword}}</span>
+<!--          <label class="control-label">{{newPassword}}</label> -->
           {{/if}}
         </div>
       </div>
@@ -75,7 +76,7 @@
   </div>
 
 
-  <input type="submit" value="Submit" class="btn btn-primary"/>
+  <input type="submit" value="Save" class="btn btn-primary"/>
 </form>
 
 </template>

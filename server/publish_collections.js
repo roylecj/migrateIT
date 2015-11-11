@@ -33,3 +33,33 @@ Meteor.publish('mappingTableSystems', function() {
 Meteor.publish('tasks', function() {
     return Tasks.find();
 })
+
+Meteor.methods({
+  updatePassword: function(userId) {
+
+    var passwd = "";
+
+    // use 8 random characters...
+
+    passwd = Random.hexString(8);
+
+    console.log("new pass=" + passwd);
+
+    // Updating the password to the value
+    Accounts.setPassword(userId, passwd);
+
+    return passwd;
+  },
+  updatePasswordByUser: function(userId, newPasswd) {
+    // Updating the password to the value
+
+    var loginId = "";
+
+    var userDetails = Meteor.users.findOne({username: userId});
+
+    loginId = userDetails._id;
+
+    Accounts.setPassword(loginId, newPasswd);
+
+  }
+})

@@ -16,13 +16,13 @@
 
       <ul class="nav navbar-nav">
         <li><a href="{{pathFor 'mappingTable'}}" class="navbar-link">Mapping Tables</a></li>
-        {{#if adminUser}}
-          <li><a href="{{pathFor 'taskList'}}" class="navbar-link">Tasks
+        <li><a href="{{pathFor 'taskList'}}" class="navbar-link">Tasks
             {{#if unreadTasks}}
               <span class="badge">
               {{taskCount}}
               </span>
             {{/if}}</a></li>
+        {{#if adminUser}}
           <li><a href="{{pathFor 'systemDetails'}}" class="navbar-link">Systems</a></li>
           <li><a href="{{pathFor 'accounts'}}" class="navbar-link">Users</a></li>
           <li><a href="{{pathFor 'settingEntry'}}" class="navbar-link">Settings</a></li>
@@ -30,7 +30,10 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <div class="btn-toolbar">
+          <button type="button" class="btn btn-info">Change Password</button>
         <button type="button" class="btn btn-danger btnLogout">Logout {{currentUserName}}</button>
+        </div>
       </ul>
     </div>
     {{/if}}
